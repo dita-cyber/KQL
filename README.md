@@ -2,17 +2,17 @@
 
 **My Go-To Microsoft Queries**
 
-Over the last three years, I've relied on these queries to help me efficiently search, analyze, and react to all alerts and events I encountered as a SIEM technician and SOC analyst. Knowing KQL (Kusto Query Language)is a very important skill for all professionals working on Microsoft environments. 
+Over the last three years, I've relied on these queries to help me efficiently search, analyze, and react to all alerts and events I encountered as a SIEM technician and SOC analyst. Knowing KQL (Kusto Query Language) is a very important skill for all professionals working on Microsoft environments. 
 
-Below I will list all KQL queries I use on my day to day but you can find the complete information of all tables and its usage cases under the official microsoft documentation about advanced hunting schema and KQL
+Below I will list all KQL queries I use on my day to day; however, you can find the complete information of all tables and its use cases under the official Microsoft documentation about KQL and advanced hunting schema.
 
-Kusto Query Language overview: 
+**Kusto Query Language overview:**
 https://learn.microsoft.com/en-us/kusto/query/?view=microsoft-fabric
 
-KQL quick reference:
+**KQL quick reference:**
 https://learn.microsoft.com/en-us/kusto/query/kql-quick-reference?view=microsoft-fabric
 
-Understand the advanced hunting schema:
+**Understand the advanced hunting schema:**
 https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-schema-tables
 
 **General search**
