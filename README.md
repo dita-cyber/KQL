@@ -15,6 +15,8 @@ https://learn.microsoft.com/en-us/kusto/query/kql-quick-reference?view=microsoft
 **Understand the advanced hunting schema:**
 https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-schema-tables
 
+---
+
 **General search**
 
 The search function is my starting point for a broad exploration across all tables. It allows me to identify the presence of specific entities across the dataset and list all tables that specific term shows for the time range I have defined.
