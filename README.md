@@ -123,7 +123,7 @@ DeviceEvents
 ```
 DeviceNetworkEvents 
 | where DeviceName contains "ENTITY" 
-| where InitiatingProcessFileName contains "powershell"< 
+| where InitiatingProcessFileName contains "powershell"
 | where ActionType !contains "ConnectionFailed" 
 | where InitiatingProcessAccountName contains "ENTITY" 
 | summarize count() by RemotePort 
