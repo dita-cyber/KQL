@@ -51,7 +51,7 @@ From my experience I found the most useful collumns are:
 
 SigninLogs<br/>
 | where TimeGenerated > ago(30d)<br/>
-| where * contains "email_account"<br/>
+| where * contains "ENTITY"<br/>
 | project TimeGenerated, UserPrincipalName, UserDisplayName, Location, LocationDetails, IPAddress, Status, ConditionalAccessStatus, AuthenticationRequirement, AuthenticationDetails, ResultType, ResultDescription, UserAgent, MfaDetail, AppDisplayName, DeviceDetail<br/>
 | sort by TimeGenerated <br/>
 
@@ -64,7 +64,7 @@ The Audit Logs table provides a detailed record of changes within Azure Active D
 AuditLogs<br/>
 | where TimeGenerated >= ago(15d)<br/>
 | where OperationName == "Change user password"<br/>
-| where TargetResources[0].userPrincipalName == "email_account" <br/>
+| where TargetResources[0].userPrincipalName == "ENTITY" <br/>
 
 ---
 
@@ -73,7 +73,7 @@ OfficeActivity<br/>
 The OfficeActivity table is the central repository for all Office 365-related events, capturing logs from applications like Microsoft Exchange 365, Microsoft SharePoint 365, and OneDrive. It includes both operational and audit events, making it a rich source of information for monitoring user activity. I leverage this table to investigate scenarios such as high download volumes, which might indicate potential data exfiltration or extensive OneDrive sync events. The detailed logs allow me to examine the user agent, file extensions, and file paths.
 
 OfficeActivity <br/>
-| search "entity" or "entity" <br/>
+| search "ENTITY" or "ENTITY" <br/>
 | where Operation == "operation_here"<br/>
 
 ---
@@ -83,20 +83,20 @@ AlertEvidence<br/>
 The AlertEvidence table, part of the advanced hunting schema, provides information about various entities, such as files, IP addresses, URLs, users, and file hashed to alerts from Microsoft Defender for Endpoint, Microsoft Defender for Office 365, Microsoft Defender for Cloud Apps, and Microsoft Defender for Identity. This table is an excellent resource for constructing queries that extract detailed information on security alerts. I usually use it to verify whether a file hash has been successfully blocked, as indicated by the "remediated status: prevented" field, along with the associated timestamp.
 
 AlertEvidence<br/>
-| where * contains 'entity"<br/>
+| where * contains "ENTITY"<br/>
 
 ---
 
 Emails and Attachments<br/>
 
 EmailEvents<br/>
-| search "entity"<br/>
+| search "ENTITY"<br/>
 
 EmailAttachmentInfo<br/>
-| where * contains "entity"<br/>
+| where * contains "ENTITY"<br/>
 
 EmailEvents <br/>
-| where TimeGenerated >= ago(3d) and EmailDirection !~ 'Inbound' and SenderFromDomain =~ 'domain.com' <br/>
+| where TimeGenerated >= ago(3d) and EmailDirection !~ 'Inbound' and SenderFromDomain =~ "DOMAIN" <br/>
 | summarize event_count = count() by bin(TimeGenerated, 1h), SenderFromAddress | sort by TimeGenerated, SenderFromAddress <br/>
 
 ---
@@ -104,20 +104,20 @@ EmailEvents <br/>
 Device Events<br/>
 
 DeviceEvents<br/>
-| where DeviceName contains "entity"<br/>
+| where DeviceName contains "ENTITY"<br/>
 
 DeviceNetworkEvents<br/>
-| where DeviceName contains "entity"<br/>
+| where DeviceName contains "ENTITY"<br/>
 | where InitiatingProcessFileName contains "powershell"<br/>
 | where ActionType !contains "ConnectionFailed"<br/>
-| where InitiatingProcessAccountName contains "entity"<br/>
+| where InitiatingProcessAccountName contains "ENTITY"<br/>
 | summarize count() by RemotePort<br/>
 
 DeviceNetworkEvents<br/>
-| where DeviceName contains "entity"<br/>
+| where DeviceName contains "ENTITY"<br/>
 | where InitiatingProcessFileName contains "powershell"<br/>
 | where ActionType contains "ConnectionFailed"<br/>
-| where InitiatingProcessAccountName contains "entity"<br/>
+| where InitiatingProcessAccountName contains "ENTITY"<br/>
 | where RemotePort == 3389<br/>
 | summarize count() by RemoteIP, RemoteUrl<br/>
 | distinct RemoteIP <br/>
@@ -135,7 +135,7 @@ Common Security Logs<br/>
 CommonSecurityLog<br/>
 | where TimeGenerated > ago(20d)<br/>
 | where DeviceVendor contains 'vendor_entity'<br/>
-| where Computer contains "entity"<br/>
+| where Computer contains "ENTITY"<br/>
 | summarize count() by bin(TimeGenerated, 5h)<br/>
 | render columnchart <br/>
 
@@ -155,7 +155,7 @@ Syslog<br/>
 
 Syslog <br/>
 | where TimeGenerated > ago(15d) <br/>
-| where Computer in ("entity", "entity", "entity") <br/>
+| where Computer in ("ENTITY", "ENTITY", "ENTITY") <br/>
 | summarize arg_max(TimeGenerated, *) , count() by Computer <br/>
 | project Computer, TimeGenerated <br/>
 | sort by TimeGenerated asc  <br/>
@@ -163,7 +163,7 @@ Syslog <br/>
 union Syslog,CommonSecurityLog<br/>
 | where TimeGenerated > ago(14d)<br/>
 | summarize count() by bin(TimeGenerated, 10m), Type<br/>
-| where Computer contains "entity" <br/>
+| where Computer contains "ENTITY" <br/>
 | render columnchart <br/>
 
 ---
@@ -171,7 +171,7 @@ union Syslog,CommonSecurityLog<br/>
 Heartbeat<br/>
 
 Heartbeat<br/>
-| where Computer contains "entity"<br/>
+| where Computer contains "ENTITY"<br/>
 | where TimeGenerated > ago(20d)<br/>
 | summarize count() by bin(TimeGenerated, 2h)<br/>
 
