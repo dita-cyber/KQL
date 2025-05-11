@@ -30,24 +30,24 @@ Logins<br/>
 
 SigninLogs table help me with tracking user login activities. It provides detailed information on login attempts, including user details and location data. This query focuses on recent activity and sorts it for easy review.
 
-From my experience I found the most useful collumns are
+From my experience I found the most useful collumns are:
 
-TimeGenerated<br/>
-UserPrincipalName<br/>
-UserDisplayName<br/>
-Location<br/>
-LocationDetails<br/>
-IPAddress<br/>
-Status<br/>
-ConditionalAccessStatus<br/>
-AuthenticationRequirement<br/>
-AuthenticationDetails<br/>
-ResultType<br/>
-ResultDescription <br/>
-UserAgent<br/>
-MfaDetail<br/>
-AppDisplayName<br/>
-DeviceDetail<br/>
+- TimeGenerated<br/>
+- UserPrincipalName<br/>
+- UserDisplayName<br/>
+- Location<br/>
+- LocationDetails<br/>
+- IPAddress<br/>
+- Status<br/>
+- ConditionalAccessStatus<br/>
+- AuthenticationRequirement<br/>
+- AuthenticationDetails<br/>
+- ResultType<br/>
+- ResultDescription <br/>
+- UserAgent<br/>
+- MfaDetail<br/>
+- AppDisplayName<br/>
+- DeviceDetail<br/>
 
 SigninLogs<br/>
 | where TimeGenerated > ago(30d)<br/>
