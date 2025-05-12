@@ -27,6 +27,17 @@ search "ENTITY"
 ```
 
 ---
+**Security Events**
+
+SecurityEvent table show all the security events collected from windows machines by Azure Security Center or Azure Sentinel. This is a good resource for investigating processes, command lines, file paths, and parent processes associated with a specific process on a host.
+
+```
+SecurityEvent
+| where Computer contains "ENTITY"
+| where * contains "PROCESS"
+| project-reorder TimeGenerated, Activity, Process, CommandLine, FileHash,  FilePath, NewProcessName, ParentProcessName, SubjectAccount
+```
+---
 
 Logins<br/>
 
