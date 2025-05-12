@@ -114,7 +114,7 @@ The OfficeActivity table is the central repository for all Office 365-related ev
 ```
 OfficeActivity 
 | search "ENTITY" or "ENTITY" 
-| where Operation == "operation_here"
+| where Operation == "OPERATION"
 ```
 
 ---
@@ -201,7 +201,7 @@ While both Syslog and CEF are popular standards for logging and event management
 ```
 CommonSecurityLog
 | where TimeGenerated > ago(20d)
-| where DeviceVendor contains 'vendor_entity'
+| where DeviceVendor contains "VENDOR"
 | where Computer contains "ENTITY"
 | summarize count() by bin(TimeGenerated, 5h)
 | render columnchart 
@@ -209,7 +209,7 @@ CommonSecurityLog
 ```
 CommonSecurityLog
 | where TimeGenerated > ago(5d)
-| where DeviceVendor contains 'Palo Alto Networks'
+| where DeviceVendor contains "VENDOR"
 | summarize arg_max(TimeGenerated, *) , count() by Computer
 | project Computer, TimeGenerated
 | sort by TimeGenerated asc
