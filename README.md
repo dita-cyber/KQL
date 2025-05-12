@@ -107,7 +107,7 @@ AuditLogs
 
 ---
 
-OfficeActivity<br/>
+Office Activity<br/>
 
 The OfficeActivity table is the central repository for all Office 365-related events, capturing logs from applications like Microsoft Exchange 365, Microsoft SharePoint 365, and OneDrive. It includes both operational and audit events, making it a rich source of information for monitoring user activity. I leverage this table to investigate scenarios such as high download volumes, which might indicate potential data exfiltration or extensive OneDrive sync events. The detailed logs allow me to examine the user agent, file extensions, and file paths.
 
@@ -119,7 +119,7 @@ OfficeActivity
 
 ---
 
-AlertEvidence<br/>
+Alert Evidence<br/>
 
 The AlertEvidence table, part of the advanced hunting schema, provides information about various entities, such as files, IP addresses, URLs, users, and file hashed to alerts from Microsoft Defender for Endpoint, Microsoft Defender for Office 365, Microsoft Defender for Cloud Apps, and Microsoft Defender for Identity. This table is an excellent resource for constructing queries that extract detailed information on security alerts. I usually use it to verify whether a file hash has been successfully blocked, as indicated by the "remediated status: prevented" field, along with the associated timestamp.
 
@@ -158,7 +158,7 @@ UrlClickEvents
 
 ---
 
-DeviceEvents<br/>
+Device Events<br/>
 
 This table is an integral component of Microsoft Defender for Endpoints integrated with Azure Sentinel. It contains a diverse range of event types, including those triggered by security controls such as Windows Defender Antivirus and exploit protection.
 
