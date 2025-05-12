@@ -125,7 +125,17 @@ EmailEvents
 ```
 ---
 
-Device Events<br/>
+DeviceEvents<br/>
+
+This table is an integral component of Microsoft Defender for Endpoints integrated with Azure Sentinel. It contains a diverse range of event types, including those triggered by security controls such as Windows Defender Antivirus and exploit protection.
+
+To gather comprehensive insights about a specific host or term, I utilize a union of the DeviceEvents table with other related Device tables, such as:
+
+DeviceNetworkEvents: Provides detailed information about network connections and related activities.<br/>
+DeviceFileEvents: Contains data on file creation, modifications, and other file system events.<br/>
+DeviceProcessEvents: Identifies the logon session of the process that initiated the event, offering insights into process activities.<br/>
+
+By combining these tables, I can efficiently collect and analyze information from multiple sources to save time instead of searching table by table.
 
 ```
 DeviceEvents
@@ -140,14 +150,10 @@ DeviceNetworkEvents
 | summarize count() by RemotePort 
 ```
 ```
-DeviceNetworkEvents
-| where DeviceName contains "ENTITY"
-| where InitiatingProcessFileName contains "powershell"
-| where ActionType contains "ConnectionFailed"
-| where InitiatingProcessAccountName contains "ENTITY"
-| where RemotePort == 3389
-| summarize count() by RemoteIP, RemoteUrl
-| distinct RemoteIP 
+union DeviceEvents, DeviceNetworkEvents, DeviceFileEvents, DeviceProcessEvents
+| where TimeGenerated > ago(2d)
+| where DeviceName has "ENTITY"
+| project-reorder TimeGenerated, Type, DeviceName, ActionType, InitiatingProcessFileName, InitiatingProcessCommandLine, RemoteUrl, RemoteIP, RemoteIPType
 ```
 ---
 
