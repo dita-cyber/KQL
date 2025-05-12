@@ -147,6 +147,17 @@ EmailEvents
 ```
 ---
 
+URL Clicks
+
+Events involving URLs clicked, selected, or requested on Microsoft Defender for Office 365.
+
+```
+UrlClickEvents
+| where url contains "ENTITY"
+```
+
+---
+
 DeviceEvents<br/>
 
 This table is an integral component of Microsoft Defender for Endpoints integrated with Azure Sentinel. It contains a diverse range of event types, including those triggered by security controls such as Windows Defender Antivirus and exploit protection.
@@ -243,7 +254,9 @@ Heartbeat
 
 ---
 
-Usage Spike<br/>
+Usage<br/>
+
+It gives information about data ingestion and usage within your Log Analytics workspace, including billable data. It is useful to understand data spikes for certain logs. 
 
 ```
 Usage
