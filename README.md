@@ -90,23 +90,7 @@ AADNonInteractiveUserSignInLogs
 | where not(ResultType in (50126, 50053)) 
 | where ClientAppUsed == "Other clients" and UserAgent == "fasthttp"
 | where ResultType in (_SuccessResultTypes) or AuthenticationDetails has 'succeeded":true'
-| project-reorder
-    CreatedDateTime,
-    Category,
-    UserPrincipalName,
-    AlternateSignInName,
-    IPAddress,
-    Location,
-    AutonomousSystemNumber,
-    ResultType,
-    ResultDescription,
-    AuthenticationDetails,
-    AppDisplayName,
-    UserAgent,
-    AppId,
-    UserId,
-    OriginalRequestId,
-    CorrelationId
+| project-reorder CreatedDateTime, Category, UserPrincipalName, AlternateSignInName, IPAddress, Location, AutonomousSystemNumber, ResultType, ResultDescription, AuthenticationDetails, AppDisplayName, UserAgent, AppId, UserId, OriginalRequestId, CorrelationId
 ```
 ---
 
