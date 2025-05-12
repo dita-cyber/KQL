@@ -41,9 +41,14 @@ SecurityEvent
 
 Logins<br/>
 
-SigninLogs table help me with tracking user login activities. It provides detailed information on login attempts, including user details and location data. This query focuses on recent activity and sorts it for easy review.
+SigninLogs table help me with tracking user login activities. It provides detailed information on login attempts, including user details and location data.  
 
-From my experience I found the most useful collumns are:
+Difference between SigninLogs and AADNonInteractiveUserSignInLogs
+
+**SigninLogs:** User-driven sign-ins, where the user directly interacts with the login process. 
+**AADNonInteractiveUserSignInLogs:** Sign-ins performed by applications or systems on behalf of a user, without user interaction. 
+
+From my experience I found the most useful collumns for SigninLogs table are:
 
 - TimeGenerated<br/>
 - UserPrincipalName<br/>
@@ -69,7 +74,40 @@ SigninLogs
 | project TimeGenerated, UserPrincipalName, UserDisplayName, Location, LocationDetails, IPAddress, Status, ConditionalAccessStatus, AuthenticationRequirement, AuthenticationDetails, ResultType, ResultDescription, UserAgent, MfaDetail, AppDisplayName, DeviceDetail 
 | sort by TimeGenerated 
 ```
-
+```
+AADNonInteractiveUserSignInLogs
+| where UserPrincipalName == "ENTITY"
+| extend DeviceName = parse_json(DeviceDetail).displayName
+| extend TrustType = parse_json(DeviceDetail).trustType
+| extend Browser = parse_json(DeviceDetail).browser
+| extend City = parse_json(LocationDetails).city
+| extend Country = tostring(parse_json(LocationDetails).countryOrRegion)
+| extend StatusDetails = tostring(parse_json(Status).additionalDetails)
+| project TimeGenerated, AppDisplayName,DeviceName, TrustType, Browser, IPAddress ,AuthenticationRequirement,StatusDetails, ClientAppUsed, City
+```
+```
+AADNonInteractiveUserSignInLogs
+| where not(ResultType in (50126, 50053)) 
+| where ClientAppUsed == "Other clients" and UserAgent == "fasthttp"
+| where ResultType in (_SuccessResultTypes) or AuthenticationDetails has 'succeeded":true'
+| project-reorder
+    CreatedDateTime,
+    Category,
+    UserPrincipalName,
+    AlternateSignInName,
+    IPAddress,
+    Location,
+    AutonomousSystemNumber,
+    ResultType,
+    ResultDescription,
+    AuthenticationDetails,
+    AppDisplayName,
+    UserAgent,
+    AppId,
+    UserId,
+    OriginalRequestId,
+    CorrelationId
+```
 ---
 
 Audit Logs<br/>
