@@ -45,7 +45,7 @@ SigninLogs table help me with tracking user login activities. It provides detail
 
 Difference between SigninLogs and AADNonInteractiveUserSignInLogs
 
-**SigninLogs:** User-driven sign-ins, where the user directly interacts with the login process. 
+**SigninLogs:** User-driven sign-ins, where the user directly interacts with the login process. <br/>
 **AADNonInteractiveUserSignInLogs:** Sign-ins performed by applications or systems on behalf of a user, without user interaction. 
 
 From my experience I found the most useful collumns for SigninLogs table are:
