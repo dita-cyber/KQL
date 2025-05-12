@@ -15,6 +15,8 @@ https://learn.microsoft.com/en-us/kusto/query/kql-quick-reference?view=microsoft
 **Understand the advanced hunting schema:**
 https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-schema-tables
 
+![image alt](https://github.com/dita-cyber/KQL/blob/7bd626ad3a3019be65cbaef8deab0fad8a15a69a/kql_image1.png) 
+
 ---
 
 **General search**
