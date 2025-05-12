@@ -39,7 +39,7 @@ SecurityEvent
 ```
 ---
 
-Logins<br/>
+**Logins**<br/>
 
 SigninLogs table help me with tracking user login activities. It provides detailed information on login attempts, including user details and location data.  
 
@@ -94,7 +94,7 @@ AADNonInteractiveUserSignInLogs
 ```
 ---
 
-Audit Logs<br/>
+**Audit Logs**<br/>
 
 The Audit Logs table provides a detailed record of changes within Azure Active Directory (Azure AD), capturing activities such as user creation, group additions, and modifications across the Azure AD environment. It also includes entries from Azure AD Privileged Identity Management. This table helps verifyind user account compromise investigations, validating password changes, tracking new devices added to MFA, monitoring password resets, and checking when accounts are disabled or enabled. By cross-referencing this data with other sources, I gain deeper insights and enhance correlation for a more comprehensive understanding of security events accross an environment. 
 
@@ -107,7 +107,7 @@ AuditLogs
 
 ---
 
-Office Activity<br/>
+**Office Activity**<br/>
 
 The OfficeActivity table is the central repository for all Office 365-related events, capturing logs from applications like Microsoft Exchange 365, Microsoft SharePoint 365, and OneDrive. It includes both operational and audit events, making it a rich source of information for monitoring user activity. I leverage this table to investigate scenarios such as high download volumes, which might indicate potential data exfiltration or extensive OneDrive sync events. The detailed logs allow me to examine the user agent, file extensions, and file paths.
 
@@ -119,7 +119,7 @@ OfficeActivity
 
 ---
 
-Alert Evidence<br/>
+**Alert Evidence**<br/>
 
 The AlertEvidence table, part of the advanced hunting schema, provides information about various entities, such as files, IP addresses, URLs, users, and file hashed to alerts from Microsoft Defender for Endpoint, Microsoft Defender for Office 365, Microsoft Defender for Cloud Apps, and Microsoft Defender for Identity. This table is an excellent resource for constructing queries that extract detailed information on security alerts. I usually use it to verify whether a file hash has been successfully blocked, as indicated by the "remediated status: prevented" field, along with the associated timestamp.
 
@@ -130,7 +130,7 @@ AlertEvidence
 
 ---
 
-Emails and Attachments<br/>
+**Emails and Attachments**<br/>
 
 ```
 EmailEvents 
@@ -147,7 +147,7 @@ EmailEvents
 ```
 ---
 
-URL Clicks
+**URL Clicks**
 
 Events involving URLs clicked, selected, or requested on Microsoft Defender for Office 365.
 
@@ -158,7 +158,7 @@ UrlClickEvents
 
 ---
 
-Device Events<br/>
+**Device Events**<br/>
 
 This table is an integral component of Microsoft Defender for Endpoints integrated with Azure Sentinel. It contains a diverse range of event types, including those triggered by security controls such as Windows Defender Antivirus and exploit protection.
 
@@ -196,7 +196,7 @@ Syslog, on the other hand, is a widely used protocol for logging messages across
 
 While both Syslog and CEF are popular standards for logging and event management, CEF provides a pre-parsed, structured format specifically for security-related events, such as details on source and destination IPs, ports, and protocols. Syslog messages, in contrast, may contain a broader range of system information that requires interpretation.
 
-Common Security Logs<br/>
+**Common Security Logs**<br/>
 
 ```
 CommonSecurityLog
@@ -215,7 +215,7 @@ CommonSecurityLog
 | sort by TimeGenerated asc
 ```
 
-Syslog<br/>
+**Syslog**<br/>
 
 ```
 Syslog
@@ -241,7 +241,7 @@ union Syslog,CommonSecurityLog
 
 ---
 
-Heartbeat<br/>
+**Heartbeat**<br/>
 
 It shows records logged by Log Analytics agents once per minute to report on agent health for a specific host. It is useful to check if hosts are up and running and troubleshoot connectivity and log ingestion disruption. 
 
@@ -254,7 +254,7 @@ Heartbeat
 
 ---
 
-Usage<br/>
+**Usage**<br/>
 
 It gives information about data ingestion and usage within your Log Analytics workspace, including billable data. It is useful to understand data spikes for certain logs. 
 
