@@ -232,6 +232,8 @@ union Syslog,CommonSecurityLog
 
 Heartbeat<br/>
 
+It shows records logged by Log Analytics agents once per minute to report on agent health for a specific host. It is useful to check if hosts are up and running and troubleshoot connectivity and log ingestion disruption. 
+
 ```
 Heartbeat
 | where Computer contains "ENTITY"
