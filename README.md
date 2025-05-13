@@ -26,6 +26,12 @@ search "ENTITY"
 | summarize count() by $table 
 ```
 
+I also use this query below if I want to search all tables containing more than one keyword:
+
+```
+search "ENTITY1" and "ENTITY2"
+| summarize count() by $table
+```
 ---
 **Security Events**
 
