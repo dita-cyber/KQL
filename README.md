@@ -4,6 +4,8 @@
 
 Over the last three years, I've relied on these queries to help me efficiently search, analyze, and react to all alerts and events I encountered as a SIEM technician and SOC analyst. Knowing KQL (Kusto Query Language) is a very important skill for all professionals working on Microsoft environments. 
 
+You don't need super advanced and lengthy queries to find the information you need; often, starting with a simple search or listing all the tables can give you a sense of how many logs are related to the specific term you're searching for. Over time, you'll become familiar with which tables are relevant for certain alerts or information and which ones might not be as useful. If you encounter a table with a large number of alerts, you can refine your search by adding more filters based on the columns available in that table. With time and experience you will be able to gradually build your own KQL library too. 
+
 I listed below all KQL queries I use on my day to day; however, you can find the complete information of all tables and its use cases under the official Microsoft documentation about KQL and advanced hunting schema.
 
 **Kusto Query Language overview:**
