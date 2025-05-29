@@ -202,7 +202,7 @@ union DeviceEvents, DeviceNetworkEvents, DeviceFileEvents, DeviceProcessEvents
 
 **Common Security Logs and Syslog**<br/>
 
-Common Security Logs are a collection of events formatted in the Common Event Format (CEF), typically received from security devices like firewalls from vendors such as Cisco and Palo Alto. These logs are designed to be easily readable and standardized for security information and event management (SIEM) systems, facilitating efficient analysis of security events and threats.
+Common Security Logs are a collection of events formatted in the Common Event Format (CEF), typically received from security devices like firewalls from vendors such as Cisco and Palo Alto. These logs are designed to be easily readable and standardized for SIEM systems, facilitating efficient analysis of security events and threats.
 
 Syslog, on the other hand, is a widely used protocol for logging messages across various systems and network devices. It allows for the centralized collection and monitoring of system messages, including events, errors, warnings, and user activity. This standardization helps IT administrators effectively troubleshoot and manage network and system issues.
 
