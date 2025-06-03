@@ -104,6 +104,17 @@ AADNonInteractiveUserSignInLogs
 ```
 ---
 
+**IdentityInfo**<br/>
+
+IdentityInfo table is related to Azure Sentinel UEBA with all your users identities information. I like to use this table to correlate user data, for instance, if I only have a user's SID, I can utilize this table to identify the user, explore associated groups, and gather detailed information about the user's account.
+
+```
+IdentityInfo
+| where * contains "S-1-5-21-________-_________-________-_____"
+```
+
+---
+
 **Audit Logs**<br/>
 
 The Audit Logs table provides a detailed record of changes within Azure Active Directory (Azure AD), capturing activities such as user creation, group additions, and modifications across the Azure AD environment. It also includes entries from Azure AD Privileged Identity Management. This table helps verifyind user account compromise investigations, validating password changes, tracking new devices added to MFA, monitoring password resets, and checking when accounts are disabled or enabled. By cross-referencing this data with other sources, I gain deeper insights and enhance correlation for a more comprehensive understanding of security events accross an environment. 
