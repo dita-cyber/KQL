@@ -168,6 +168,20 @@ UrlClickEvents
 
 ---
 
+**LDAP**
+
+IdentityQueryEvents is a table in the advanced hunting schema that logs LDAP queries performed against domain controllers. This table provides visibility into the LDAP search queries running the environment and can help detect potential reconnaissance or other malicious activities. It records details such as the query itself, the target object, and the source of the query (e.g., IP address, user account). 
+
+```
+IdentityQueryEvents
+| where TimeGenerated > ago(30d)
+| search "ENTITY" and "ENTITY"
+| where QueryType !contains "NS"
+| where QueryType !contains "srv"
+```
+
+---
+
 **Device Events**<br/>
 
 This table is an integral component of Microsoft Defender for Endpoints integrated with Azure Sentinel. It contains a diverse range of event types, including those triggered by security controls such as Windows Defender Antivirus and exploit protection.
