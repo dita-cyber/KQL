@@ -238,6 +238,35 @@ union DeviceEvents, DeviceNetworkEvents, DeviceFileEvents, DeviceProcessEvents
 ```
 ---
 
+**DNS**<br/>
+
+DnsEvents and DnsQueryLogs to investigate for unusual patterns in DNS queries, analyze responses, or look for potential tunneling activities.
+
+```
+DnsEvents
+| where TimeGenerated > ago(7d)
+| where QueryType == "DNS_RECORD"
+| where strlength(Response) > 100
+| summarize count() by QueryName, Response
+```
+```
+DnsEvents
+| where SubType == "LookupQuery"
+| where Name == "domain.com"
+```
+
+To investigate DNS events based on FQDNs use DeviceNetworkEvents table:
+
+```
+DeviceNetworkEvents
+| where Protocol == "DNS"
+| extend query = tostring(parse_json(AdditionalFields).query)
+| where query == "DOMAIN.EXAMPLE.COM"
+| project TimeGenerated, SourceIpAddress, DeviceName, query
+```
+---
+
+
 **Common Security Logs and Syslog**<br/>
 
 Common Security Logs are a collection of events formatted in the Common Event Format (CEF), typically received from security devices like firewalls from vendors such as Cisco and Palo Alto. These logs are designed to be easily readable and standardized for SIEM systems, facilitating efficient analysis of security events and threats.
