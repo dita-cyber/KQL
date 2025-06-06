@@ -138,6 +138,18 @@ OfficeActivity
 | where Operation == "OPERATION"
 ```
 
+OfficeActivity table can also be used to detect and investigate suspicious inbox manipulation rules. Look for events with Operation values indicating the creation or modification of inbox rules (e.g., "New-InboxRule", "Set-InboxRule"). Some examples of suspicious behavior:
+- Forwarding to unknown or untrusted recipient <br/>
+- Moving emails to a hidden or deleted folders <br/>
+- Marking emails as read to avoid detection <br/>
+- Filtering by keywords: analyze the keywords used in the rule's filters <br/>
+- Absence of filtering could also be suspiciou <br/>
+
+```
+OfficeActivity
+| search "ENTITY"
+| where Operation contains "Inbox"
+```
 ---
 
 **Alert Evidence**<br/>
@@ -152,13 +164,6 @@ AlertEvidence
 ---
 
 **Emails and Attachments**<br/>
-
-EmailEvents can be used to detect and investigate suspicious inbox manipulation rules. Look for events with ActionType values indicating the creation or modification of inbox rules (e.g., "New-InboxRule", "Set-InboxRule"). Some examples of suspicious behavior:
-- Forwarding to unknown or untrusted recipient <br/>
-- Moving emails to a hidden or deleted folders <br/>
-- Marking emails as read to avoid detection <br/>
-- Filtering by keywords: analyze the keywords used in the rule's filters <br/>
-- Absence of filtering could also be suspiciou <br/>
 
 ```
 EmailEvents 
