@@ -153,18 +153,26 @@ AlertEvidence
 
 **Emails and Attachments**<br/>
 
+EmailEvents can be used to detect and investigate suspicious inbox manipulation rules. Look for events with ActionType values indicating the creation or modification of inbox rules (e.g., "New-InboxRule", "Set-InboxRule"). Some examples of suspicious behavior:
+- Forwarding to unknown or untrusted recipient <br/>
+- Moving emails to a hidden or deleted folders <br/>
+- Marking emails as read to avoid detection <br/>
+- Filtering by keywords: analyze the keywords used in the rule's filters <br/>
+- Absence of filtering could also be suspiciou <br/>
+
 ```
 EmailEvents 
 | search "ENTITY" 
 ```
 ```
+EmailEvents
+| search "ENTITY"
+| project-reorder TimeGenerated, SenderFromAddress, RecipientEmailAddress, Subject, NetworkMessageId
+| where * contains "KEYWORD"
+```
+```
 EmailAttachmentInfo 
 | where * contains "ENTITY"
-```
-```
-EmailEvents  
-| where TimeGenerated >= ago(3d) and EmailDirection !~ 'Inbound' and SenderFromDomain =~ "DOMAIN"  
-| summarize event_count = count() by bin(TimeGenerated, 1h), SenderFromAddress | sort by TimeGenerated, SenderFromAddress  
 ```
 ---
 
