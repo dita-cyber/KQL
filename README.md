@@ -206,6 +206,34 @@ IdentityQueryEvents
 
 ---
 
+**DNS**<br/>
+
+DnsEvents and DnsQueryLogs to investigate for unusual patterns in DNS queries, analyze responses, or look for potential tunneling activities.
+
+```
+DnsEvents
+| where TimeGenerated > ago(7d)
+| where QueryType == "DNS_RECORD"
+| where strlength(Response) > 100
+| summarize count() by QueryName, Response
+```
+```
+DnsEvents
+| where SubType == "LookupQuery"
+| where Name == "domain.com"
+```
+
+To investigate DNS events based on FQDNs use **DeviceNetworkEvents** table:
+
+```
+DeviceNetworkEvents
+| where Protocol == "DNS"
+| extend query = tostring(parse_json(AdditionalFields).query)
+| where query == "DOMAIN.EXAMPLE.COM"
+| project TimeGenerated, SourceIpAddress, DeviceName, query
+```
+---
+
 **Device Events**<br/>
 
 This table is an integral component of Microsoft Defender for Endpoints integrated with Azure Sentinel. It contains a diverse range of event types, including those triggered by security controls such as Windows Defender Antivirus and exploit protection.
@@ -235,34 +263,6 @@ union DeviceEvents, DeviceNetworkEvents, DeviceFileEvents, DeviceProcessEvents
 | where TimeGenerated > ago(2d)
 | where DeviceName has "ENTITY"
 | project-reorder TimeGenerated, Type, DeviceName, ActionType, InitiatingProcessFileName, InitiatingProcessCommandLine, RemoteUrl, RemoteIP, RemoteIPType
-```
----
-
-**DNS**<br/>
-
-DnsEvents and DnsQueryLogs to investigate for unusual patterns in DNS queries, analyze responses, or look for potential tunneling activities.
-
-```
-DnsEvents
-| where TimeGenerated > ago(7d)
-| where QueryType == "DNS_RECORD"
-| where strlength(Response) > 100
-| summarize count() by QueryName, Response
-```
-```
-DnsEvents
-| where SubType == "LookupQuery"
-| where Name == "domain.com"
-```
-
-To investigate DNS events based on FQDNs use DeviceNetworkEvents table:
-
-```
-DeviceNetworkEvents
-| where Protocol == "DNS"
-| extend query = tostring(parse_json(AdditionalFields).query)
-| where query == "DOMAIN.EXAMPLE.COM"
-| project TimeGenerated, SourceIpAddress, DeviceName, query
 ```
 ---
 
