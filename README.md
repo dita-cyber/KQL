@@ -222,8 +222,7 @@ DnsEvents
 | where SubType == "LookupQuery"
 | where Name == "domain.com"
 ```
-
-To investigate DNS events based on FQDNs use **DeviceNetworkEvents** table:
+To investigate DNS events based on FQDNs use **DeviceNetworkEvents** and **IdentityQueryEvents** tables:
 
 ```
 DeviceNetworkEvents
@@ -232,6 +231,11 @@ DeviceNetworkEvents
 | where query == "DOMAIN.EXAMPLE.COM"
 | project TimeGenerated, SourceIpAddress, DeviceName, query
 ```
+```
+IdentityQueryEvents
+| where * contains "DOMAIN.EXAMPLE.COM"
+```
+
 ---
 
 **Device Events**<br/>
