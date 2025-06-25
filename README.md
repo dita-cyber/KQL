@@ -206,6 +206,22 @@ IdentityQueryEvents
 
 ---
 
+Kerberos / Suspected identity theft (pass-the-ticket)
+
+Events where a user uses a ticket on a different machine than where the ticket was originally issued is an indicator of a pass-the-ticket attack. It is recommended to check the age of tickets and look for activity beyond their set validity and identify mismatched user/device pairs where a Kerberos ticket is used on a device that doesn't match the user typically associated with it.  
+
+Verify SecurityEvent table logs for Event ID 4769 - A Kerberos service ticket was requested 
+
+```
+SecurityEvent
+| search "ENTITY" and "ENTITY"
+| where EventID == 4769
+| where * contains "IP ADDRESS"
+```
+
+---
+
+
 **DNS**<br/>
 
 DnsEvents and DnsQueryLogs to investigate for unusual patterns in DNS queries, analyze responses, or look for potential tunneling activities.
